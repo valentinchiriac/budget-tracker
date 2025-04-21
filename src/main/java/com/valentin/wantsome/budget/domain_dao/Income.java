@@ -23,6 +23,10 @@ public class Income {
         this.categoryId = categoryId;
     }
 
+    public Income() {
+
+    }
+
     public Long getIncomeId() {
         return incomeId;
     }
