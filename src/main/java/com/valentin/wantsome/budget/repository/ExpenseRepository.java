@@ -1,5 +1,6 @@
-package com.valentin.wantsome.budget.domain_dao;
+package com.valentin.wantsome.budget.repository;
 
+import com.valentin.wantsome.budget.domain_dao.Expense;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

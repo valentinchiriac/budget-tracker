@@ -1,8 +1,13 @@
 package com.valentin.wantsome.budget.domain_dao;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
+@Table
 public class Income {
     private Long incomeId;
     private Date incomeDate;

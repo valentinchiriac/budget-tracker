@@ -2,7 +2,8 @@ package com.valentin.wantsome.budget.domain_dao;
 
 import java.util.Objects;
 
-public class CategoryOfExpense {
+
+public class ExpenseCategory {
     private Long categoryId;
     private String categoryName;
     private String categoryType;
@@ -31,7 +32,7 @@ public class CategoryOfExpense {
         this.categoryType = categoryType;
     }
 
-    public CategoryOfExpense(Long categoryId, String categoryName, String categoryType) {
+    public ExpenseCategory(Long categoryId, String categoryName, String categoryType) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.categoryType = categoryType;
@@ -41,7 +42,7 @@ public class CategoryOfExpense {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        CategoryOfExpense that = (CategoryOfExpense) o;
+        ExpenseCategory that = (ExpenseCategory) o;
         return Objects.equals(categoryId, that.categoryId) && Objects.equals(categoryName, that.categoryName) && Objects.equals(categoryType, that.categoryType);
     }
 
