@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Incomes List</title>
+  <style>
+    table {
+        border-collapse: collapse;
+        width: 80%;
+        border: 2px solid black;
+    }
+    th, td {
+        border: 2px solid black;
+        padding: 10px;
+        text-align: right;
+    }
+    th {
+        background-color: lightgray;
+    }
+  </style>
+</head>
+<body>
+<div th:insert="~{fragments.html :: nav}"></div>
+<h1>Incomes List</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Income ID</th>
+    <th>Income Date</th>
+    <th>Income Name</th>
+    <th>Income Amount</th>
+    <th>Category</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="income : ${expenses}">
+    <td th:text="${income.id}">1</td>
+    <td th:text="${income.date}">10/05/2025</td>
+    <td th:text="${income.name}">Salar</td>
+    <td th:text="${income.amount}">10000</td>
+    <td th:text="${income.category}">Salarii</td>
+  </tr>
+  </tbody>
+</table>
+
+<div th:insert="~{fragments.html :: footer}"></div>
+</body>
+</html>
