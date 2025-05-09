@@ -1,0 +1,50 @@
+input {
+    color: red;
+    padding: 8px;
+    transform: uppercase;
+}
+
+label {
+    color: blue;
+    font-weight: bold;
+    }
+    label:first-of-type {
+        text-transform: uppercase;
+    }
+
+[name*="n"] {
+background-color: brown;}
+
+
+table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 3px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: lightgray;
+        }
+.nav-links a {
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 10px;
+    color: blue;
+}
+meter {
+    width: 10%;
+    height: 20px;
+    background: pink;
+}
+
+meter::-webkit-meter-optimum-value {
+    background: pink;
+}
+td:first-of-type {
+    font-weight: bold;
+    color: green;
+}
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Schedule</title>
+    <link rel="stylesheet" href="/style.css" />
+
+    <script>
+        function updateMeter() {
+            const today = new Date();
+            const currentDay = today.getDate();
+            const totalDays = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate(); // Get total days in current month
+
+            document.getElementById("month-progress").value = currentDay;
+            document.getElementById("month-progress").max = totalDays;
+        }
+    </script>
+</head>
+<body onload="updateMeter()">
+<h1>Calendarul lui Vali</h1>
+
+
+<label for="month-progress">May Progress:</label>
+<meter id="month-progress" value="1" min="0"></meter>
+<br><br>
+
+<div class="nav-links">
+
+<a href="bio_valentin.html" target="_blank">Valentin's Bio</a> |
+<a href="index.html" target="_blank">Home</a> |
+<a href="schedule.html" target="_blank">Schedule</a>
+
+<table>
+    <tr>
+        <th>Time</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+        <th>Sunday</th>
+    </tr>
+    <tr>
+        <td><h2>09:00 - 12:00</h2></td><td style="font-weight: bold; color: green;">Work</td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td><h3>12:00 - 15:00</h3></td><td></td><td style="font-weight: bold; color: red;">Play</td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td><h4>15:00 - 17:00</h4></td><td></td><td></td><td style="font-weight: bold; color: orange;">Run</td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td><h5>17:00 - 20:00</h5></td><td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1024px-HTML5_logo_and_wordmark.svg.png"
+                                                alt="Html 5 image" width="150">
+    </td><td></td><td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1024px-HTML5_logo_and_wordmark.svg.png"
+                           alt="Html 5 image" width="150"></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td><h6>20:00 - 23:00</h6></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+</table>
+</body>
+</html>
