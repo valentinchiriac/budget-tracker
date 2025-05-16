@@ -1,19 +1,26 @@
 package com.valentin.wantsome.budget.domain_dao;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table
+@Table(name="expense")
 public class Expense {
+    @Id
+    @GeneratedValue
     private Long expenseId;
     private Date expenseDate;
     private String expenseName;
     private double expenseAmount;
     private Long categoryId;
+
+    public Expense() {
+    }
 
     public Expense(Long expenseId, Date expenseDate, String expenseName, double expenseAmount, Long categoryId) {
         this.expenseId = expenseId;
@@ -21,10 +28,6 @@ public class Expense {
         this.expenseName = expenseName;
         this.expenseAmount = expenseAmount;
         this.categoryId = categoryId;
-    }
-
-    public Expense() {
-
     }
 
     public Long getExpenseId() {

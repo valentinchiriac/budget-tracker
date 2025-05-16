@@ -1,9 +1,17 @@
 package com.valentin.wantsome.budget.domain_dao;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.util.Objects;
 
-
+@Entity
+@Table(name = "expense_category")
 public class ExpenseCategory {
+    @Id
+    @GeneratedValue
     private Long categoryId;
     private String categoryName;
     private String categoryType;
@@ -30,6 +38,9 @@ public class ExpenseCategory {
 
     public void setCategoryType(String categoryType) {
         this.categoryType = categoryType;
+    }
+
+    public ExpenseCategory() {
     }
 
     public ExpenseCategory(Long categoryId, String categoryName, String categoryType) {
