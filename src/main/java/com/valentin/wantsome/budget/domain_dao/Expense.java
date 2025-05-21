@@ -17,17 +17,17 @@ public class Expense {
     private Date expenseDate;
     private String expenseName;
     private double expenseAmount;
-    private Long categoryId;
+    private Long expenseCategoryId;
 
     public Expense() {
     }
 
-    public Expense(Long expenseId, Date expenseDate, String expenseName, double expenseAmount, Long categoryId) {
+    public Expense(Long expenseId, Date expenseDate, String expenseName, double expenseAmount, Long expenseCategoryId) {
         this.expenseId = expenseId;
         this.expenseDate = expenseDate;
         this.expenseName = expenseName;
         this.expenseAmount = expenseAmount;
-        this.categoryId = categoryId;
+        this.expenseCategoryId = expenseCategoryId;
     }
 
     public Long getExpenseId() {
@@ -62,24 +62,24 @@ public class Expense {
         this.expenseAmount = expenseAmount;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public Long getExpenseCategoryId() {
+        return expenseCategoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setExpenseCategoryId(Long expenseCategoryId) {
+        this.expenseCategoryId = expenseCategoryId;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Expense expense = (Expense) o;
-        return Double.compare(expenseAmount, expense.expenseAmount) == 0 && Objects.equals(expenseId, expense.expenseId) && Objects.equals(expenseDate, expense.expenseDate) && Objects.equals(expenseName, expense.expenseName) && Objects.equals(categoryId, expense.categoryId);
+        return Double.compare(expenseAmount, expense.expenseAmount) == 0 && Objects.equals(expenseId, expense.expenseId) && Objects.equals(expenseDate, expense.expenseDate) && Objects.equals(expenseName, expense.expenseName) && Objects.equals(expenseCategoryId, expense.expenseCategoryId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(expenseId, expenseDate, expenseName, expenseAmount, categoryId);
+        return Objects.hash(expenseId, expenseDate, expenseName, expenseAmount, expenseCategoryId);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class Expense {
                 ", expenseDate=" + expenseDate +
                 ", expenseName='" + expenseName + '\'' +
                 ", expenseAmount=" + expenseAmount +
-                ", categoryId=" + categoryId +
+                ", categoryId=" + expenseCategoryId +
                 '}';
     }
 }
