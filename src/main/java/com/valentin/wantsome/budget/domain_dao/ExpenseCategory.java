@@ -1,9 +1,6 @@
 package com.valentin.wantsome.budget.domain_dao;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -13,6 +10,8 @@ public class ExpenseCategory {
     @Id
     @GeneratedValue
     private Long categoryId;
+//
+//    @Enumerated(EnumType.STRING)
     private String categoryName;
     private String categoryType;
 
