@@ -10,32 +10,32 @@ import java.util.Objects;
 public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long expenseId;
+    private Long id;
     private Date expenseDate;
     private String expenseName;
     private double expenseAmount;
     //private Long expenseCategoryId;
-    @ManyToOne
-    @JoinColumn(name="expense_Category_Id", nullable = false)
+    //@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    //@JoinColumn(name="category_id")
     private ExpenseCategory expenseCategory;
 
     public Expense() {
     }
 
-    public Expense(long expenseId, Date expenseDate, String expenseName, double expenseAmount, ExpenseCategory expenseCategory) {
-        this.expenseId = expenseId;
+    public Expense(long id, Date expenseDate, String expenseName, double expenseAmount, ExpenseCategory expenseCategory) {
+        this.id = id;
         this.expenseDate = expenseDate;
         this.expenseName = expenseName;
         this.expenseAmount = expenseAmount;
         this.expenseCategory = expenseCategory;
     }
 
-    public long getExpenseId() {
-        return expenseId;
+    public long getId() {
+        return id;
     }
 
-    public void setExpenseId(long expenseId) {
-        this.expenseId = expenseId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getExpenseDate() {
@@ -74,18 +74,18 @@ public class Expense {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Expense expense = (Expense) o;
-        return Double.compare(expenseAmount, expense.expenseAmount) == 0 && Objects.equals(expenseId, expense.expenseId) && Objects.equals(expenseDate, expense.expenseDate) && Objects.equals(expenseName, expense.expenseName) && Objects.equals(expenseCategory, expense.expenseCategory);
+        return Double.compare(expenseAmount, expense.expenseAmount) == 0 && Objects.equals(id, expense.id) && Objects.equals(expenseDate, expense.expenseDate) && Objects.equals(expenseName, expense.expenseName) && Objects.equals(expenseCategory, expense.expenseCategory);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(expenseId, expenseDate, expenseName, expenseAmount, expenseCategory);
+        return Objects.hash(id, expenseDate, expenseName, expenseAmount, expenseCategory);
     }
 
     @Override
     public String toString() {
         return "expense{" +
-                "expenseId=" + expenseId +
+                "expenseId=" + id +
                 ", expenseDate=" + expenseDate +
                 ", expenseName='" + expenseName + '\'' +
                 ", expenseAmount=" + expenseAmount +

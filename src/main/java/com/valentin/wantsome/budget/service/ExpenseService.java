@@ -5,48 +5,44 @@ import com.valentin.wantsome.budget.repository.ExpenseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ExpenseService {
-    private ExpenseRepository expenseRepository;
+    private final ExpenseRepository expenseRepository; //made final
 
-    public void ExpenseRepository(ExpenseRepository expenseRepository) {
-        this.expenseRepository = expenseRepository;    }
-
-    public List<Expense> getExpense(){
-        List<Expense> expenses = (List<Expense>) expenseRepository.findAll();
-        return expenses;
-    }
-
-    public Expense addExpense(Expense expense) {return expenseRepository.save(expense);}
-
-    public Optional<Expense> getExpense(int id) {return expenseRepository.findById(id);}
-
-    public void updateExpense(Expense expense,int id){
-        if (expenseRepository.existsById(id)) {
-            expense.setExpenseId(id);
-            expenseRepository.save(expense);
-        }else{
-            throw new RuntimeException("Expense not found");
-        }
-    }
-
-    public void deleteExpenseById(int id){
-        if(expenseRepository.existsById(id)){
-            expenseRepository.deleteById(id);
-        }else{
-            throw new RuntimeException("Expense not found");
-        }
-    }
-
-    public ExpenseService(ExpenseRepository expenseRepository) {
+    public ExpenseService(ExpenseRepository expenseRepository) { //constructor
         this.expenseRepository = expenseRepository;
     }
 
-//    public List<Expense> findALl(){
-//        return expenseRepository.findAll();
-//    }
+    public List<Expense> findAll() {
+        return expenseRepository.findAll();
+    }
+
+    public Expense getExpense(long id) {
+        //return expenseRepository.findById(id);
+        return expenseRepository.findByExpenseId(id);
+    }
+
+    public Expense addExpense(Expense expense) {
+        return expenseRepository.save(expense);
+    }
+
+    public void updateExpense(Expense expense, Long id) {
+        if (expenseRepository.existsById(id)) {
+            expense.setId(id);
+            expenseRepository.save(expense);
+        } else {
+            throw new RuntimeException("Expense not found");
+        }
+    }
+
+    public void deleteExpenseById(Long id) {
+        if (expenseRepository.existsById(id)) {
+            expenseRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Expense not found");
+        }
+    }
 
     public void saveExpense(Expense expense) {
         expenseRepository.save(expense);
