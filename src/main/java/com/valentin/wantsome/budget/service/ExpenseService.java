@@ -5,10 +5,11 @@ import com.valentin.wantsome.budget.repository.ExpenseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExpenseService {
-    private final ExpenseRepository expenseRepository; //made final
+    private ExpenseRepository expenseRepository;
 
     public ExpenseService(ExpenseRepository expenseRepository) { //constructor
         this.expenseRepository = expenseRepository;
@@ -18,9 +19,8 @@ public class ExpenseService {
         return expenseRepository.findAll();
     }
 
-    public Expense getExpense(long id) {
-        //return expenseRepository.findById(id);
-        return expenseRepository.findByExpenseId(id);
+    public Optional<Expense> getExpense(long id) {
+        return expenseRepository.findById(id);
     }
 
     public Expense addExpense(Expense expense) {

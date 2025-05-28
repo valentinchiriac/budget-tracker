@@ -2,6 +2,7 @@ package com.valentin.wantsome.budget.domain_dao;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,20 +18,25 @@ public class ExpenseCategory {
 
     private String categoryType;
 
-//    @OneToMany(mappedBy = "expense_category",
-//            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "expenseCategory",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private List<Expense> expenses;
 
     public ExpenseCategory() {}
 
-    public ExpenseCategory(Long id, ExpenseCategoryType categoryName, String categoryType) {
+    public ExpenseCategory(Long id, ExpenseCategoryType categoryName, String categoryType, List<Expense> expenses) {
         this.id = id;
         this.categoryName = categoryName;
         this.categoryType = categoryType;
+        this.expenses = expenses;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public ExpenseCategoryType getCategoryName() {
@@ -49,24 +55,41 @@ public class ExpenseCategory {
         this.categoryType = categoryType;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        ExpenseCategory that = (ExpenseCategory) o;
-        return Objects.equals(id, that.id) && categoryName == that.categoryName && Objects.equals(categoryType, that.categoryType);
+    public List<Expense> getExpenses() {
+        return expenses;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, categoryName, categoryType);
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
+    }
+
+    public void add(Expense expense){
+        if (expense == null) {
+            expenses = new ArrayList<>();
+        }
+        expenses.add(expense);
+        expense.setExpenseCategory(this);
     }
 
     @Override
     public String toString() {
         return "ExpenseCategory{" +
-                "categoryId=" + id +
+                "id=" + id +
                 ", categoryName=" + categoryName +
                 ", categoryType='" + categoryType + '\'' +
+                ", expenses=" + expenses +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ExpenseCategory that = (ExpenseCategory) o;
+        return Objects.equals(id, that.id) && categoryName == that.categoryName && Objects.equals(categoryType, that.categoryType) && Objects.equals(expenses, that.expenses);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, categoryName, categoryType, expenses);
     }
 }

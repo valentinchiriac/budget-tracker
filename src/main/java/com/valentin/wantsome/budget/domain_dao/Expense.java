@@ -14,9 +14,8 @@ public class Expense {
     private Date expenseDate;
     private String expenseName;
     private double expenseAmount;
-    //private Long expenseCategoryId;
-    //@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    //@JoinColumn(name="category_id")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name="category_id")
     private ExpenseCategory expenseCategory;
 
     public Expense() {
@@ -62,11 +61,11 @@ public class Expense {
         this.expenseAmount = expenseAmount;
     }
 
-//    public long getExpenseCategory() {
-//        return expenseCategory;
-//    }
+    public ExpenseCategory getExpenseCategory() {
+        return expenseCategory;
+    }
 
-    public void setExpenseCategoryId(long expenseCategoryId) {
+    public void setExpenseCategory(ExpenseCategory expenseCategory) {
         this.expenseCategory = expenseCategory;
     }
 
