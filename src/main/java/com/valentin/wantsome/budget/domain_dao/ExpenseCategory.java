@@ -1,9 +1,9 @@
 package com.valentin.wantsome.budget.domain_dao;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 @Table(name = "expense_category")
@@ -17,8 +17,8 @@ public class ExpenseCategory {
 
     private String categoryType;
 
-//    @OneToMany(mappedBy = "expense_category",
-//            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "expenseCategory",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private List<Expense> expenses;
 
     public ExpenseCategory() {}
@@ -41,12 +41,20 @@ public class ExpenseCategory {
         this.categoryName = categoryName;
     }
 
-    public String getCategoryType() {
-        return categoryType;
+    public Optional<String> getCategoryType() { // ✅ Return Optional
+        return Optional.ofNullable(categoryType);
     }
 
     public void setCategoryType(String categoryType) {
         this.categoryType = categoryType;
+    }
+
+    public Optional<List<Expense>> getExpenses() { // ✅ Return Optional list
+        return Optional.ofNullable(expenses);
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
     }
 
     @Override
@@ -66,7 +74,7 @@ public class ExpenseCategory {
         return "ExpenseCategory{" +
                 "categoryId=" + id +
                 ", categoryName=" + categoryName +
-                ", categoryType='" + categoryType + '\'' +
+                ", categoryType='" + getCategoryType().orElse("Not specified") + '\'' + // ✅ Using Optional safely
                 '}';
     }
 }

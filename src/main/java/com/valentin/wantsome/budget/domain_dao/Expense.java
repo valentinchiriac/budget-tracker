@@ -15,8 +15,8 @@ public class Expense {
     private String expenseName;
     private double expenseAmount;
     //private Long expenseCategoryId;
-    //@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    //@JoinColumn(name="category_id")
+    @ManyToOne
+    @JoinColumn(name="expense_category_id", nullable = false)
     private ExpenseCategory expenseCategory;
 
     public Expense() {
