@@ -1,9 +1,6 @@
 package com.valentin.wantsome.budget.domain_dao;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.Objects;
@@ -12,30 +9,32 @@ import java.util.Objects;
 @Table(name="expense")
 public class Expense {
     @Id
-    @GeneratedValue
-    private Long expenseId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Date expenseDate;
     private String expenseName;
     private double expenseAmount;
-    private Long expenseCategoryId;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name="category_id")
+    private ExpenseCategory expenseCategory;
 
     public Expense() {
     }
 
-    public Expense(Long expenseId, Date expenseDate, String expenseName, double expenseAmount, Long expenseCategoryId) {
-        this.expenseId = expenseId;
+    public Expense(long id, Date expenseDate, String expenseName, double expenseAmount, ExpenseCategory expenseCategory) {
+        this.id = id;
         this.expenseDate = expenseDate;
         this.expenseName = expenseName;
         this.expenseAmount = expenseAmount;
-        this.expenseCategoryId = expenseCategoryId;
+        this.expenseCategory = expenseCategory;
     }
 
-    public Long getExpenseId() {
-        return expenseId;
+    public long getId() {
+        return id;
     }
 
-    public void setExpenseId(Long expenseId) {
-        this.expenseId = expenseId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getExpenseDate() {
@@ -62,34 +61,34 @@ public class Expense {
         this.expenseAmount = expenseAmount;
     }
 
-    public Long getExpenseCategoryId() {
-        return expenseCategoryId;
+    public ExpenseCategory getExpenseCategory() {
+        return expenseCategory;
     }
 
-    public void setExpenseCategoryId(Long expenseCategoryId) {
-        this.expenseCategoryId = expenseCategoryId;
+    public void setExpenseCategory(ExpenseCategory expenseCategory) {
+        this.expenseCategory = expenseCategory;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Expense expense = (Expense) o;
-        return Double.compare(expenseAmount, expense.expenseAmount) == 0 && Objects.equals(expenseId, expense.expenseId) && Objects.equals(expenseDate, expense.expenseDate) && Objects.equals(expenseName, expense.expenseName) && Objects.equals(expenseCategoryId, expense.expenseCategoryId);
+        return Double.compare(expenseAmount, expense.expenseAmount) == 0 && Objects.equals(id, expense.id) && Objects.equals(expenseDate, expense.expenseDate) && Objects.equals(expenseName, expense.expenseName) && Objects.equals(expenseCategory, expense.expenseCategory);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(expenseId, expenseDate, expenseName, expenseAmount, expenseCategoryId);
+        return Objects.hash(id, expenseDate, expenseName, expenseAmount, expenseCategory);
     }
 
     @Override
     public String toString() {
         return "expense{" +
-                "expenseId=" + expenseId +
+                "expenseId=" + id +
                 ", expenseDate=" + expenseDate +
                 ", expenseName='" + expenseName + '\'' +
                 ", expenseAmount=" + expenseAmount +
-                ", categoryId=" + expenseCategoryId +
+                ", categoryId=" + expenseCategory +
                 '}';
     }
 }
