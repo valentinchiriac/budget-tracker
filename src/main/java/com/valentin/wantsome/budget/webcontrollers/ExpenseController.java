@@ -1,52 +1,40 @@
 package com.valentin.wantsome.budget.webcontrollers;
 
 import com.valentin.wantsome.budget.domain_dao.Expense;
-import com.valentin.wantsome.budget.exception.NoExpenseException;
+import com.valentin.wantsome.budget.domain_dao.ExpenseCategoryType;
 import com.valentin.wantsome.budget.service.ExpenseService;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.Arrays;
 
 @RestController
-@RequestMapping("/api") // Adds a base path for endpoints
 public class ExpenseController {
     private final ExpenseService expenseService;
-
-    public ExpenseController(ExpenseService expenseService) {
-        this.expenseService = expenseService;
-    }
+    public ExpenseController(ExpenseService expenseService) {this.expenseService = expenseService;}
 
     @GetMapping("/expenses")
-    public List<Expense> getAllExpenses() {
-        List<Expense> expenses = expenseService.findAll();
-        if (expenses.isEmpty()) {
-            throw new NoExpenseException("No expenses found.");
-        }
-        return expenses;
+    public String expense(Model model){
+        model.addAttribute("expenses", expenseService.findAll());
+        return "expenses";
+    }
+    @GetMapping("/expenseForm")
+    public String expenseForm(Model model) {
+        model.addAttribute("expense", new Expense());
+        model.addAttribute("categories", Arrays.asList(ExpenseCategoryType.values()));
+        return "expenseForm";
     }
 
-    @PostMapping("/expense")
-    public ResponseEntity<Expense> addExpense(@RequestBody Expense expense) {
-        Expense savedExpense = expenseService.addExpense(expense);
-        return ResponseEntity.ok(savedExpense);
-    }
+    @PostMapping("/submitExpense")
+    public String saveExpense(@ModelAttribute Expense expense, Model model) {
+        expenseService.saveExpense(expense);
 
-    @GetMapping("/expense/{id}")
-    public Optional<Expense> getExpense(@PathVariable Long id) {
-        return expenseService.getExpense(id);
-    }
-
-    @PutMapping("/expense/{id}")
-    public ResponseEntity<String> updateExpense(@RequestBody Expense expense, @PathVariable Long id) {
-        expenseService.updateExpense(expense, id);
-        return ResponseEntity.ok("Expense updated successfully!");
-    }
-
-    @DeleteMapping("/expense/{id}")
-    public ResponseEntity<String> deleteExpenseById(@PathVariable Long id) {
-        expenseService.deleteExpenseById(id);
-        return ResponseEntity.ok("Expense deleted successfully!");
+        model.addAttribute("title", "Expenses");
+        model.addAttribute("expenses", expenseService.findAll());
+        return "expenses";
     }
 }
