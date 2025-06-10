@@ -1,40 +1,45 @@
 package com.valentin.wantsome.budget.webcontrollers;
 
 import com.valentin.wantsome.budget.domain_dao.Expense;
-import com.valentin.wantsome.budget.domain_dao.ExpenseCategoryType;
+import com.valentin.wantsome.budget.domain_dao.ExpenseCategory;
+import com.valentin.wantsome.budget.service.ExpenseCategoryService;
 import com.valentin.wantsome.budget.service.ExpenseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
+import java.util.List;
 
-@RestController
+@Controller
+@RequestMapping("/")
 public class ExpenseController {
     private final ExpenseService expenseService;
-    public ExpenseController(ExpenseService expenseService) {this.expenseService = expenseService;}
+    private final ExpenseCategoryService expenseCategoryService;
+
+    public ExpenseController(ExpenseService expenseService, ExpenseCategoryService expenseCategoryService) {this.expenseService = expenseService;
+        this.expenseCategoryService = expenseCategoryService;
+    }
 
     @GetMapping("/expenses")
     public String expense(Model model){
         model.addAttribute("expenses", expenseService.findAll());
         return "expenses";
     }
+
     @GetMapping("/expenseForm")
     public String expenseForm(Model model) {
+        List<ExpenseCategory> categories = expenseCategoryService.findAll();
+
         model.addAttribute("expense", new Expense());
-        model.addAttribute("categories", Arrays.asList(ExpenseCategoryType.values()));
+        model.addAttribute("categories", categories);
         return "expenseForm";
     }
 
     @PostMapping("/submitExpense")
     public String saveExpense(@ModelAttribute Expense expense, Model model) {
-        expenseService.saveExpense(expense);
-
+        expenseService.save(expense);
         model.addAttribute("title", "Expenses");
         model.addAttribute("expenses", expenseService.findAll());
-        return "expenses";
+        return "redirect:/expenses";
     }
 }

@@ -12,19 +12,15 @@ public class ExpenseCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Enumerated(EnumType.STRING)
-    private ExpenseCategoryType categoryName;
-
+    private String categoryName;
     private String categoryType;
-
     @OneToMany(mappedBy = "expenseCategory",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private List<Expense> expenses;
 
     public ExpenseCategory() {}
 
-    public ExpenseCategory(Long id, ExpenseCategoryType categoryName, String categoryType, List<Expense> expenses) {
+    public ExpenseCategory(Long id, String categoryName, String categoryType, List<Expense> expenses) {
         this.id = id;
         this.categoryName = categoryName;
         this.categoryType = categoryType;
@@ -39,11 +35,11 @@ public class ExpenseCategory {
         this.id = id;
     }
 
-    public ExpenseCategoryType getCategoryName() {
+    public String getCategoryName() {
         return categoryName;
     }
 
-    public void setCategoryName(ExpenseCategoryType categoryName) {
+    public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
 
@@ -73,12 +69,7 @@ public class ExpenseCategory {
 
     @Override
     public String toString() {
-        return "ExpenseCategory{" +
-                "id=" + id +
-                ", categoryName=" + categoryName +
-                ", categoryType='" + categoryType + '\'' +
-                ", expenses=" + expenses +
-                '}';
+        return categoryName;
     }
 
     @Override
