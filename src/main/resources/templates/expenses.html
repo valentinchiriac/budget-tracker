@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Expenses List</title>
+
     <style>
+        body {
+           font-family: Arial, sans-serif;
+
         table {
             border-collapse: collapse;
             width: 80%;
@@ -15,13 +19,22 @@
             text-align: right;
         }
         th {
-            background-color: lightgray;
+            background-color: #28a745;
         }
+        h1 {
+           text-align: top;
+           color: #007bff;
+       }
+
     </style>
 </head>
     <tbody>
     <!--<div th:insert="~{fragments.html :: nav}"></div>-->
     <h1>Expenses List</h1>
+    <div>
+        <a th:href="@{/expenseForm}">Go to Expense Form</a>
+    </div>
+    <br>
     <table>
         <thead>
         <tr>
@@ -40,6 +53,5 @@
             <td th:text="${expense.expenseCategory}">Groceries</td>
         </tr>
     </table>
-    <!--<div th:insert="~{fragments.html :: footer}"></div>-->
     </tbody>
 </html>

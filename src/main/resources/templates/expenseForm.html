@@ -3,9 +3,83 @@
     <head>
         <meta charset="UTF-8">
         <title>Expense Form</title>
-        <link rel="stylesheet" href="/css/styles.css">
+   <style>
+
+       body {
+           font-family: Arial, sans-serif;
+           background-color: #f4f4f4;
+           color: #333;
+           margin: 0;
+           padding: 20px;
+       }
+        .wrapper {
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+        }
+
+       form {
+           background-color: #fff;
+           padding: 20px;
+           border-radius: 8px;
+           box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+           margin-top: 10px;
+       }
+
+
+       h1 {
+           text-align: top;
+           color: #007bff;
+       }
+
+
+       label {
+           font-weight: bold;
+           display: block;
+           margin-top: 10px;
+       }
+
+       input {
+           width: 100%;
+           padding: 8px;
+           margin-top: 5px;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+       }
+
+       button {
+           background-color: #28a745;
+           color: white;
+           padding: 10px;
+           border: none;
+           border-radius: 5px;
+           cursor: pointer;
+           width: 100%;
+           margin-top: 15px;
+           font-size: 16px;
+       }
+
+       button:hover {
+           background-color: #218838;
+       }
+
+       a {
+           display: block;
+           text-align: center;
+           margin-top: 15px;
+           color: #007bff;
+           text-decoration: none;
+           font-weight: bold;
+       }
+
+       a:hover {
+           text-decoration: underline;
+       }
+
+   </style>
     </head>
     <body>
+        <div class="wrapper">
         <h1>Expense Form</h1>
         <form th:action="@{/submitExpense}" th:object="${expense}" method="post">
 
@@ -41,7 +115,7 @@
         <div>
             <a th:href="@{/expenses}">Go to Expenses List</a>
         </div>
-
         </form>
+        </div>
     </body>
 </html>

@@ -1,6 +1,6 @@
 #FileLock
-#Tue Jun 10 22:55:27 EEST 2025
-server=127.0.1.1\:46539
-hostName=andrei-ThinkBook
+#Sat Jun 14 13:17:14 EEST 2025
+hostName=192.168.1.11
+id=1976df1867ddba746ae2666c810ef4913fe1e90a04f
 method=file
-id=1975b696d0d5c4f0c6fa93c106e144934340135b1b0
+server=192.168.1.11\:52518

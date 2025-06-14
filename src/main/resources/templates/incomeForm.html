@@ -3,37 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <title>Income Form</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+         .wrapper {
+         text-align: center;
+         max-width: 400px;
+         width: 100%;
+         }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+
+
+        h1 {
+            text-align: top;
+            color: #007bff;
+        }
+
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
 </head>
 <body>
 
-<div class="container">
-    <h1 class="title">Income Form</h1>
+<div class="wrapper">
+    <h1>Income Form</h1>
 
     <form th:action="@{/submitIncome}" th:object="${income}" method="post">
+
         <div>
-            <label for="id">Income ID</label>
-            <input type="text" id="id" th:field="*{id}"/> <br/>
+            <label for="IncomeDate">Income Date</label>
+            <input type="date" id="incomeDate" th:field="*{IncomeDate}"/> <br/>
         </div>
 
         <div>
-            <label for="date">Income Date</label>
-            <input type="date" id="date" th:field="*{date}"/> <br/>
+            <label for="IncomeName">Income Name</label>
+            <input type="text" id="IncomeName" th:field="*{IncomeName}"/> <br/>
         </div>
 
         <div>
-            <label for="name">Income Name</label>
-            <input type="text" id="name" th:field="*{name}"/> <br/>
+            <label for="IncomeAmount">Income Amount</label>
+            <input type="number" id="IncomeAmount" th:field="*{incomeAmount}"/> <br/>
         </div>
 
         <div>
-            <label for="amount">Income Amount</label>
-            <input type="number" id="amount" th:field="*{amount}"/> <br/>
-        </div>
-
-        <div>
-            <label for="category">Income Category</label>
-            <input type="text" id="category" th:field="*{category}"/> <br/>
+            <label for="incomeCategory">Income Category</label>
+            <select id="incomeCategory" th:field="*{incomeCategory}" required>
+                <option th:each="category : ${categories}"
+                        th:value="${category.id}"
+                        th:text="${category.categoryName}">
+                </option>
+            </select> <br/>
         </div>
 
         <div>
