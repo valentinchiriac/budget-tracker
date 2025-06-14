@@ -2,7 +2,7 @@ package com.valentin.wantsome.budget.domain_dao;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -11,7 +11,7 @@ public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date expenseDate;
+    private LocalDate expenseDate;
     private String expenseName;
     private double expenseAmount;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
@@ -21,7 +21,7 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(long id, Date expenseDate, String expenseName, double expenseAmount, ExpenseCategory expenseCategory) {
+    public Expense(long id, LocalDate expenseDate, String expenseName, double expenseAmount, ExpenseCategory expenseCategory) {
         this.id = id;
         this.expenseDate = expenseDate;
         this.expenseName = expenseName;
@@ -37,11 +37,11 @@ public class Expense {
         this.id = id;
     }
 
-    public Date getExpenseDate() {
+    public LocalDate getExpenseDate() {
         return expenseDate;
     }
 
-    public void setExpenseDate(Date expenseDate) {
+    public void setExpenseDate(LocalDate expenseDate) {
         this.expenseDate = expenseDate;
     }
 
@@ -83,12 +83,12 @@ public class Expense {
 
     @Override
     public String toString() {
-        return "expense{" +
-                "expenseId=" + id +
+        return "Expense{" +
+                "id=" + id +
                 ", expenseDate=" + expenseDate +
                 ", expenseName='" + expenseName + '\'' +
                 ", expenseAmount=" + expenseAmount +
-                ", categoryId=" + expenseCategory +
+                ", expenseCategory=" + (expenseCategory != null ? expenseCategory.getCategoryName() : null) +
                 '}';
     }
 }

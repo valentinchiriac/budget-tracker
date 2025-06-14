@@ -44,7 +44,7 @@ public class ExpenseService {
         }
     }
 
-    public void saveExpense(Expense expense) {
+    public void save(Expense expense) {
         expenseRepository.save(expense);
     }
 }

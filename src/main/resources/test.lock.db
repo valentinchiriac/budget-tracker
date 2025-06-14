@@ -1,0 +1,6 @@
+#FileLock
+#Sat Jun 14 13:17:14 EEST 2025
+hostName=192.168.1.11
+id=1976df1867ddba746ae2666c810ef4913fe1e90a04f
+method=file
+server=192.168.1.11\:52518

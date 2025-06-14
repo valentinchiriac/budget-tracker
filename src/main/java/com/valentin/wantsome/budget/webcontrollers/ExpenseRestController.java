@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@RequestMapping("/")
-public class ExpenseController {
+@RestController
+@RequestMapping("/rest")
+public class ExpenseRestController {
     private final ExpenseService expenseService;
     private final ExpenseCategoryService expenseCategoryService;
 
-    public ExpenseController(ExpenseService expenseService, ExpenseCategoryService expenseCategoryService) {this.expenseService = expenseService;
+    public ExpenseRestController(ExpenseService expenseService, ExpenseCategoryService expenseCategoryService) {this.expenseService = expenseService;
         this.expenseCategoryService = expenseCategoryService;
     }
 
     @GetMapping("/expenses")
-    public String expense(Model model){
-        model.addAttribute("expenses", expenseService.findAll());
-        return "expenses";
+    public  List<Expense> expense(){
+        List<Expense> expenses = expenseService.findAll();
+        return expenses;
     }
 
     @GetMapping("/expenseForm")
